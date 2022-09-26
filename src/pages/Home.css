@@ -4,10 +4,11 @@
   height: 100vh;
   width: 100vw;
   background-size: cover;
+  /* object-fit: fill; */
   z-index: -999;
 }
 
-.containerGradinet {
+.containerGradient {
   background-image: linear-gradient(rgb(0,0,0,0.75), rgb(0,0,0,0));
   height:50%;
   width:100%
@@ -16,7 +17,7 @@
 
 .lrContainers {
   width: 200px;
-  justify-content: end;
+  justify-content: flex-end;
   display: flex;
   align-items: center;
 }

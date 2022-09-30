@@ -2,16 +2,16 @@ import React from "react";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 import { useState, useEffect } from "react";
 
-function RentalsMap(locations, google) {
+function RentalsMap({locations, google}) {
   const [center, setCenter] = useState();
 
   useEffect(() => {
     let arr = Object.keys(locations);
     let getLat = (key) => locations[key]["lat"];
-    let avgLat = arr.reduce((a, c) => (a + Number(getLat(c)), 0) / arr.length);
+    let avgLat = arr.reduce((a, c) => a + Number(getLat(c)), 0) / arr.length;
 
     let getLng = (key) => locations[key]["lng"];
-    let avgLng = arr.reduce((a, c) => (a + Number(getLng(c)), 0) / arr.length);
+    let avgLng = arr.reduce((a, c) => a + Number(getLng(c)), 0) / arr.length;
 
     setCenter({ lat: avgLat, lng: avgLng });
 

@@ -8,6 +8,8 @@ import RentalsMap from "../components/RentalsMap";
 
 const Rentals = () => {
   const { state: searchFilters } = useLocation();
+  const [coOrdinates, setCoOrdinates] = useState([]);
+
   const rentalsList = [
     {
       attributes: {
@@ -19,9 +21,9 @@ const Rentals = () => {
         lat: "40.716862",
         long: "-73.999005",
         name: "Apartment in China Town",
-        pricePerDay: "3",
-      },
-    },
+        pricePerDay: "3"
+      }
+    }
   ];
 
   let cords = [];
@@ -39,28 +41,28 @@ const Rentals = () => {
         </div>
         <div className="searchReminder">
           <div className="filter">
-            {searchFilters?.destination || "New York"}
+            {searchFilters.destination || "New York"}
           </div>
           <div className="vl" />
           <div className="filter">
             {`
-            ${searchFilters?.checkIn?.toLocaleString("default", {
-              month: "short",
+            ${searchFilters.checkIn.toLocaleString("default", {
+              month: "short"
             })}
-            ${searchFilters?.checkIn?.toLocaleString("default", {
-              day: "2-digit",
+            ${searchFilters.checkIn.toLocaleString("default", {
+              day: "2-digit"
             })}
             -
-            ${searchFilters?.checkOut?.toLocaleString("default", {
-              month: "short",
+            ${searchFilters.checkOut.toLocaleString("default", {
+              month: "short"
             })}
-            ${searchFilters?.checkOut?.toLocaleString("default", {
-              day: "2-digit",
+            ${searchFilters.checkOut.toLocaleString("default", {
+              day: "2-digit"
             })}
             `}
           </div>
           <div className="vl" />
-          <div className="filter">{searchFilters?.guests} Guest</div>
+          <div className="filter">{searchFilters.guests} Guest</div>
           <div className="searchFiltersIcon">
             <Icon fill="#ffffff" size={20} svg="search" />
           </div>
@@ -69,6 +71,7 @@ const Rentals = () => {
           <ConnectButton />
         </div>
       </div>
+      {/* topBanner end */}
 
       <hr className="line" />
       <div className="rentalsContentL">
@@ -78,7 +81,11 @@ const Rentals = () => {
               <>
                 <hr className="line2" />
                 <div className="rentalDiv">
-                  <img className="rentalImg" src={rental.attributes.imgUrl} alt="Rental property"></img>
+                  <img
+                    className="rentalImg"
+                    src={rental.attributes.imgUrl}
+                    alt="Rental property"
+                  ></img>
                   <div className="rentalInfo">
                     <div className="rentalTitle">{rental.attributes.name}</div>
                     <div className="rentalDesc">
@@ -88,23 +95,19 @@ const Rentals = () => {
                       {rental.attributes.dosDescription}
                     </div>
                     <div className="bottomButton">
-                      <Button
-                        text="Stay Here"
-                        />
-                        <div className="price">
-                          <Icon fill="#808080" size={10} svg="matic" /> {rental.attributes.pricePerDay} / Day
-                        </div>
+                      <Button text="Stay Here" />
+                      <div className="price">
+                        <Icon fill="#808080" size={10} svg="matic" />{" "}
+                        {rental.attributes.pricePerDay} / Day
+                      </div>
                     </div>
                   </div>
                 </div>
               </>
             );
           })}
-        ;
       </div>
-      <div className="rentalsContentR">
-        <RentalsMap locations={cords} />
-      </div>
+      <div className="rentalsContentR"></div>
     </>
   );
 };

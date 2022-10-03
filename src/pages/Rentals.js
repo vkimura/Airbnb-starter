@@ -3,12 +3,16 @@ import "./Rentals.css";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router";
 import logo from "../images/airbnbRed.png";
-import { Button, ConnectButton, Icon } from "web3uikit";
+import { ConnectButton, Button, Icon, useNotification } from "web3uikit";
 import RentalsMap from "../components/RentalsMap";
+import { useState, useEffect } from "react";
+import User from "../components/User";
 
 const Rentals = () => {
   const { state: searchFilters } = useLocation();
-  const [coOrdinates, setCoOrdinates] = useState([]);
+  // const [highLight, setHightLight] = useState();
+  // // const [rentalsList, setRentalsList] = useState();
+  // const [coOrdinates, setCoOrdinates] = useState([]);
 
   const rentalsList = [
     {
@@ -74,40 +78,46 @@ const Rentals = () => {
       {/* topBanner end */}
 
       <hr className="line" />
-      <div className="rentalsContentL">
-        {rentalsList &&
-          rentalsList.map((rental) => {
-            return (
-              <>
-                <hr className="line2" />
-                <div className="rentalDiv">
-                  <img
-                    className="rentalImg"
-                    src={rental.attributes.imgUrl}
-                    alt="Rental property"
-                  ></img>
-                  <div className="rentalInfo">
-                    <div className="rentalTitle">{rental.attributes.name}</div>
-                    <div className="rentalDesc">
-                      {rental.attributes.unoDescription}
-                    </div>
-                    <div className="rentalDesc">
-                      {rental.attributes.dosDescription}
-                    </div>
-                    <div className="bottomButton">
-                      <Button text="Stay Here" />
-                      <div className="price">
-                        <Icon fill="#808080" size={10} svg="matic" />{" "}
-                        {rental.attributes.pricePerDay} / Day
+      <div className="rentalsContent">
+        <div className="rentalsContentL">
+          {rentalsList &&
+            rentalsList.map((rental) => {
+              return (
+                <>
+                  <hr className="line2" />
+                  <div className="rentalDiv">
+                    <img
+                      className="rentalImg"
+                      src={rental.attributes.imgUrl}
+                      alt="Rental property"
+                    ></img>
+                    <div className="rentalInfo">
+                      <div className="rentalTitle">
+                        {rental.attributes.name}
+                      </div>
+                      <div className="rentalDesc">
+                        {rental.attributes.unoDescription}
+                      </div>
+                      <div className="rentalDesc">
+                        {rental.attributes.dosDescription}
+                      </div>
+                      <div className="bottomButton">
+                        <Button text="Stay Here" />
+                        <div className="price">
+                          <Icon fill="#808080" size={10} svg="matic" />{" "}
+                          {rental.attributes.pricePerDay} / Day
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </>
-            );
-          })}
+                </>
+              );
+            })}
+        </div>
+        <div className="rentalsContentR">
+          <RentalsMap locations={cords} />
+        </div>
       </div>
-      <div className="rentalsContentR"></div>
     </>
   );
 };
